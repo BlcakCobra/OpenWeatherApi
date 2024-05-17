@@ -1,0 +1,38 @@
+.header{
+    width:100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.upMenu{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction:row;
+}
+.Bar{
+    width: auto;
+    height: 50px;
+    display: flex;
+    margin: 15px;
+    justify-content: center;
+    align-items: center;
+}
+.soundBar{
+    width: 200px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.SearchBar{
+    width: auto;
+    height:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* @media (max-width: 1284) {
+
+} */
