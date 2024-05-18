@@ -1,10 +1,7 @@
-import { useState } from "react"
-import { useAppSelector } from "../../../../hooks"
 import { HeaderChaptersComp } from "../../../../types/ComponentsType"
 import style from "./HeaderChapters.module.css"
 
 export const HeaderChapters: React.FC<HeaderChaptersComp> = ({chapters,handleSection,section}) => {
-    const {weatherNow} =useAppSelector(state => state.currentWeather)
 
   return (
       <div className={style.chapterInfo}>

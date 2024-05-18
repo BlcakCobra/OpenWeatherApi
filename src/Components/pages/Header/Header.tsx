@@ -16,6 +16,8 @@ export default function Header() {
   
   const [search, setSearch] = useState({ lat: "", lon: "" });
   const [volume, setVolume] = useState(25);
+  const [section, setSection] = useState("CurrentWeather");
+  const chapters = ["CurrentWeather", "5 Day / 3 Hour Forecast"];
 
   useEffect(() => {
     if (search.lat !== "" && search.lon !== "") {
@@ -35,9 +37,7 @@ export default function Header() {
     setVolume(parseInt(event.target.value));
   };
 
-  const chapters = ["CurrentWeather", "5 Day / 3 Hour Forecast"];
 
-  const [section, setSection] = useState("CurrentWeather");
   const handleSection = (section: string) => {
     setSection(section);
     console.log(section);
