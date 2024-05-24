@@ -1,21 +1,25 @@
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '../../../../../hooks';
 import style from "./CurrentWeather.module.css"
+import { CurrentWeatherComp, getWeatherIconType } from '../../../../../types/ComponentsType';
 
+  export const CurrentWeather: React.FC<CurrentWeatherComp> = ({getWeatherIcon}) => {
 
-export default function CurrentWeather() {
   const {weatherNow} = useAppSelector(state => state.currentWeather)
+
+  
   return (
     <div className={style.weather_box}>
       <h2>Current Weather</h2>
       {weatherNow ? (
         <>
+        <div className={style.iconBox}>
+        <img alt="" src={getWeatherIcon(weatherNow)!} className={style.icon}/>
+        </div>
         <h2>{weatherNow.name}</h2>
           <div>
-            <strong>Temperature:</strong> {weatherNow.main.temp}°C
+            <strong>Temperature:</strong> {Math.floor(weatherNow.main.temp-273.15)}°C
           </div>
-          <div>
-            <strong>Weather:</strong> {weatherNow.weather[0].main}
-          </div>
+         
           <div>
             <strong>Description:</strong> {weatherNow.weather[0].description}
           </div>
@@ -23,10 +27,10 @@ export default function CurrentWeather() {
             <strong>Humidity:</strong> {weatherNow.main.humidity}%
           </div>
           <div>
-            <strong>Min Temperature:</strong> {weatherNow.main.temp_min}°C
+            <strong>Min Temperature:</strong> {Math.floor(weatherNow.main.temp_min-273.15)}°C
           </div>
           <div>
-            <strong>Max Temperature:</strong> {weatherNow.main.temp_max}°C
+            <strong>Max Temperature:</strong> {Math.floor(weatherNow.main.temp_max-273.15)}°C
           </div>
           <div>
             <strong>Wind Speed:</strong> {weatherNow.wind.speed} m/s

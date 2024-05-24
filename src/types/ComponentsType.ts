@@ -1,3 +1,6 @@
+import { ForecastResponse } from "./5daysType";
+import { WeatherData } from "./SliceType";
+
 export interface SearchBarComp {
     search: {
       lat: string,
@@ -17,7 +20,19 @@ export interface SearchBarComp {
     section:string,
     handleSection: (section: string) => void;
   };
+  export type getWeatherIconType = (weatherItem: WeatherData) => string | null
+  export type getFiveDayWeatherIconType = (weatherItem: ForecastResponse) => (string | null)[];
 
   export interface MainComp {
     section:string,
+    getWeatherIcon:(weatherItem: WeatherData) => string | null
+    getFiveDayWeatherIcons : (weatherItem: ForecastResponse) => (string | null)[];
+  }
+
+  export interface FiveDaysWeatherComp{
+    getFiveDayWeatherIcons : (weatherItem: ForecastResponse) => (string | null)[];
+  }
+
+  export interface CurrentWeatherComp{
+    getWeatherIcon:(weatherItem: WeatherData) => string | null
   }

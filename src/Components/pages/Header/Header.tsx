@@ -7,12 +7,16 @@ import style from "./Header.module.css"
 import { Sound } from './SoundComp/Sound';
 import { HeaderChapters } from './HeaderChapters/HeaderChapters';
 import { Main } from './Main/Main';
+import { Tornado,Clear, Clouds,Sand,Drizzle,Rain,Snow,Thunderstorm,Mist,Dust ,Smoke} from '../../../images';
+import { getFiveDayWeatherIconType, getWeatherIconType } from '../../../types/ComponentsType';
 
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  const {weather5Days,weatherNow} = useAppSelector(state => state.currentWeather)
-  console.log(weather5Days,weatherNow);
+  const {weather5Days,weatherNow} = useAppSelector(state => state.currentWeather);
+  console.log(weather5Days);
+  console.log(weatherNow);
+  
   
   const [search, setSearch] = useState({ lat: "", lon: "" });
   const [volume, setVolume] = useState(25);
@@ -37,12 +41,72 @@ export default function Header() {
     setVolume(parseInt(event.target.value));
   };
 
-
   const handleSection = (section: string) => {
     setSection(section);
-    console.log(section);
   };
 
+  const getWeatherIcon: getWeatherIconType = (weatherIcon) => {
+    switch (weatherIcon.weather[0].main) {
+      case 'Clear':
+        return Clear;
+      case 'Clouds':
+        return Clouds;
+      case 'Drizzle':
+        return Drizzle;
+      case 'Rain':
+        return Rain;
+      case 'Thunderstorm':
+        return Thunderstorm;
+      case 'Snow':
+        return Snow;
+      case 'Mist':
+        return Mist;
+      case 'Smoke':
+        return Smoke;
+      case 'Dust':
+        return Dust;
+      case 'Sand':
+        return Sand;
+      case 'Tornado':
+        return Tornado;
+      default:
+        return null;
+    }
+  }; 
+  const getFiveDayWeatherIcons: getFiveDayWeatherIconType = (weatherIcon) => {
+    const icons = weatherIcon.list.map((el) => el.weather[0].main);
+  
+    return icons.map((mainWeather) => {
+      switch (mainWeather) {
+        case 'Clear':
+          return Clear;
+        case 'Clouds':
+          return Clouds;
+        case 'Drizzle':
+          return Drizzle;
+        case 'Rain':
+          return Rain;
+        case 'Thunderstorm':
+          return Thunderstorm;
+        case 'Snow':
+          return Snow;
+        case 'Mist':
+          return Mist;
+        case 'Smoke':
+          return Smoke;
+        case 'Dust':
+          return Dust;
+        case 'Sand':
+          return Sand;
+        case 'Tornado':
+          return Tornado;
+        default:
+          return null;
+      }
+    });
+  };
+
+  
   return (
     <header className={style.header} style={{ backgroundImage: `url(${images[0].image})` }}>
       <div className={style.upMenu}>
@@ -59,12 +123,8 @@ export default function Header() {
               }}
             />
           </div>
-
           <div className={style.soundBar}>
-            <Sound
-              volume={volume}
-              changeVolume={changeVolume}
-            />
+            <Sound volume={volume} changeVolume={changeVolume} />
           </div>
         </div>
       </div>
@@ -75,6 +135,8 @@ export default function Header() {
       />
       <Main
         section={section}
+        getWeatherIcon={getWeatherIcon}
+        getFiveDayWeatherIcons={getFiveDayWeatherIcons}
       />
     </header>
   );

@@ -4,15 +4,17 @@ interface Coord {
   lon: number;
   lat: number;
 }
+type WeatherMain = 'Clear' | 'Clouds' | 'Drizzle' | 'Rain' | 'Thunderstorm' | 'Snow' | 'Mist' | 'Smoke' | 'Dust' | 'Sand' | 'Ash' | 'Squall' | 'Tornado';
+
 
 interface Weather {
   id: number;
-  main: string;
+  main: WeatherMain | null;
   description: string;
   icon: string;
 }
 
-interface Main {
+interface MainTemp {
   temp: number;
   feels_like: number;
   temp_min: number;
@@ -49,7 +51,7 @@ export interface WeatherData {
   coord: Coord;
   weather: Weather[];
   base: string;
-  main: Main;
+  main:  MainTemp;
   visibility: number;
   wind: Wind;
   rain?: Rain; 
