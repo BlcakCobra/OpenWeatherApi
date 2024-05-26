@@ -2,32 +2,68 @@ import React from 'react'
 import { useAppSelector } from '../../../../../hooks'
 import style from "./FiveDaysWeather.module.css"
 import { FiveDaysWeatherComp } from '../../../../../types/ComponentsType'
+import { useRef } from 'react'
 
 
-  export const FiveDaysWeather: React.FC<FiveDaysWeatherComp> = ({getFiveDayWeatherIcons}) => {
-  const { weather5Days } = useAppSelector(state => state.currentWeather)
-  
+
+export const FiveDaysWeather: React.FC<FiveDaysWeatherComp> = ({ getWeatherIcon }) => {
+  const { weather5Days } = useAppSelector(state => state.currentWeather);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = (e: React.WheelEvent) => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: e.deltaY,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <div className={style.FiveDaysWeather}>
-      <h2>Weather for Five Days</h2>
       {weather5Days ? (
         <>
-          <h2>{weather5Days.city.name}</h2>
-          <div className={style.weatherList}>
+          <div className={style.title_box}>
+            <h2 className={style.h2_title}>Weather for Five Days</h2>
+            <h2>{weather5Days.city.name}</h2>
+          </div>
+          <div 
+            className={style.weatherItem_box} 
+            ref={containerRef}
+            onWheel={handleScroll}
+          >
             {weather5Days.list.map((weatherItem, index) => (
               <div key={index} className={style.weatherItem}>
-                <div className={style.date}>{new Date(weatherItem.dt * 1000).toLocaleDateString()}</div>
-                <div className={style.temp}>Temp: {weatherItem.main.temp}°C</div>
-                <div className={style.description}>{weatherItem.weather[0].description}</div>
-                <div className={style.icon}>
+                <img 
+                  src={getWeatherIcon(weatherItem.weather[0].main) ?? ''} 
+                  alt={weatherItem.weather[0].main} 
+                  className={style.icon} 
+                />
+                <div className={style.description_box}>
+                  <div className={style.date}>
+                    <strong>Date:</strong> {new Date(weatherItem.dt * 1000).toLocaleTimeString()}
+                  </div>
+                  <div className={style.temp}>
+                    <strong>Temp:</strong> {weatherItem.main.temp}°C
+                  </div>
+                  <div className={style.description}>
+                    <strong>Description:</strong> {weatherItem.weather[0].description}
+                  </div>
+                  <div className={style.description}>
+                    <strong>Max Temp:</strong> {weatherItem.main.temp_max}°C
+                  </div>
+                  <div className={style.description}>
+                    <strong>Min Temp:</strong> {weatherItem.main.temp_min}°C
+                  </div>
+                  <div className={style.icon}></div>
                 </div>
               </div>
             ))}
           </div>
         </>
       ) : (
-        <div>Weather data not available</div>
+        <div className={style.no_data_message}>Weather data not available</div>
       )}
     </div>
-  )
-}
+  );
+};

@@ -20,19 +20,21 @@ export interface SearchBarComp {
     section:string,
     handleSection: (section: string) => void;
   };
-  export type getWeatherIconType = (weatherItem: WeatherData) => string | null
-  export type getFiveDayWeatherIconType = (weatherItem: ForecastResponse) => (string | null)[];
+
+
 
   export interface MainComp {
     section:string,
-    getWeatherIcon:(weatherItem: WeatherData) => string | null
-    getFiveDayWeatherIcons : (weatherItem: ForecastResponse) => (string | null)[];
+    getWeatherIcon: getWeatherIconType
   }
 
+
+  export type getWeatherIconType = (weatherItem:string) => string | null
+
   export interface FiveDaysWeatherComp{
-    getFiveDayWeatherIcons : (weatherItem: ForecastResponse) => (string | null)[];
+    getWeatherIcon : getWeatherIconType
   }
 
   export interface CurrentWeatherComp{
-    getWeatherIcon:(weatherItem: WeatherData) => string | null
+    getWeatherIcon:getWeatherIconType
   }

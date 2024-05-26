@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../../../../hooks';
 import style from "./CurrentWeather.module.css"
-import { CurrentWeatherComp, getWeatherIconType } from '../../../../../types/ComponentsType';
+import { CurrentWeatherComp} from '../../../../../types/ComponentsType';
 
   export const CurrentWeather: React.FC<CurrentWeatherComp> = ({getWeatherIcon}) => {
 
@@ -13,7 +13,7 @@ import { CurrentWeatherComp, getWeatherIconType } from '../../../../../types/Com
       {weatherNow ? (
         <>
         <div className={style.iconBox}>
-        <img alt="" src={getWeatherIcon(weatherNow)!} className={style.icon}/>
+        <img alt="" src={getWeatherIcon(weatherNow.weather[0].main!)!} className={style.icon}/>
         </div>
         <h2>{weatherNow.name}</h2>
           <div>

@@ -4,14 +4,14 @@ import { MainComp } from '../../../../types/ComponentsType'
 import { CurrentWeather } from './CurrentWeatherComp/CurrentWeather'
 import { FiveDaysWeather } from './FiveDaysWeatherComp/FiveDaysWeather'
 
-export const Main: React.FC<MainComp> = ({section,getWeatherIcon,getFiveDayWeatherIcons}) => {
+export const Main: React.FC<MainComp> = ({section,getWeatherIcon}) => {
     return (
     <div className={style.Main}>
         {
             section === "CurrentWeather" && <CurrentWeather getWeatherIcon={getWeatherIcon}/>
         }
         {
-            section === "5 Day / 3 Hour Forecast" && <FiveDaysWeather getFiveDayWeatherIcons={getFiveDayWeatherIcons}/>
+            section === "5 Day / 3 Hour Forecast" && <FiveDaysWeather getWeatherIcon={getWeatherIcon}/>
         }
     </div>
   )

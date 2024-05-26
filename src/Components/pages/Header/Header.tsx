@@ -8,7 +8,7 @@ import { Sound } from './SoundComp/Sound';
 import { HeaderChapters } from './HeaderChapters/HeaderChapters';
 import { Main } from './Main/Main';
 import { Tornado,Clear, Clouds,Sand,Drizzle,Rain,Snow,Thunderstorm,Mist,Dust ,Smoke} from '../../../images';
-import { getFiveDayWeatherIconType, getWeatherIconType } from '../../../types/ComponentsType';
+import { getWeatherIconType } from '../../../types/ComponentsType';
 
 
 export default function Header() {
@@ -46,7 +46,7 @@ export default function Header() {
   };
 
   const getWeatherIcon: getWeatherIconType = (weatherIcon) => {
-    switch (weatherIcon.weather[0].main) {
+    switch (weatherIcon) {
       case 'Clear':
         return Clear;
       case 'Clouds':
@@ -72,41 +72,8 @@ export default function Header() {
       default:
         return null;
     }
-  }; 
-  const getFiveDayWeatherIcons: getFiveDayWeatherIconType = (weatherIcon) => {
-    const icons = weatherIcon.list.map((el) => el.weather[0].main);
-  
-    return icons.map((mainWeather) => {
-      switch (mainWeather) {
-        case 'Clear':
-          return Clear;
-        case 'Clouds':
-          return Clouds;
-        case 'Drizzle':
-          return Drizzle;
-        case 'Rain':
-          return Rain;
-        case 'Thunderstorm':
-          return Thunderstorm;
-        case 'Snow':
-          return Snow;
-        case 'Mist':
-          return Mist;
-        case 'Smoke':
-          return Smoke;
-        case 'Dust':
-          return Dust;
-        case 'Sand':
-          return Sand;
-        case 'Tornado':
-          return Tornado;
-        default:
-          return null;
-      }
-    });
   };
-
-  
+   
   return (
     <header className={style.header} style={{ backgroundImage: `url(${images[0].image})` }}>
       <div className={style.upMenu}>
@@ -136,7 +103,6 @@ export default function Header() {
       <Main
         section={section}
         getWeatherIcon={getWeatherIcon}
-        getFiveDayWeatherIcons={getFiveDayWeatherIcons}
       />
     </header>
   );
