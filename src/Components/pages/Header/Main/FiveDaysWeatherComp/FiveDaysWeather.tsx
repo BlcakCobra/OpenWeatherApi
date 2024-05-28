@@ -41,19 +41,20 @@ export const FiveDaysWeather: React.FC<FiveDaysWeatherComp> = ({ getWeatherIcon 
                 />
                 <div className={style.description_box}>
                   <div className={style.date}>
-                    <strong>Date:</strong> {new Date(weatherItem.dt * 1000).toLocaleTimeString()}
+                    <strong>Time:</strong> {new Date(weatherItem.dt * 1000).toLocaleTimeString()}
                   </div>
+                  
                   <div className={style.temp}>
-                    <strong>Temp:</strong> {weatherItem.main.temp}°C
+                    <strong>Temp:</strong> {Math.floor(weatherItem.main.temp) -273}°C
                   </div>
                   <div className={style.description}>
                     <strong>Description:</strong> {weatherItem.weather[0].description}
                   </div>
                   <div className={style.description}>
-                    <strong>Max Temp:</strong> {weatherItem.main.temp_max}°C
+                    <strong>Max Temp:</strong> {Math.floor(weatherItem.main.temp_max) -273}°C
                   </div>
                   <div className={style.description}>
-                    <strong>Min Temp:</strong> {weatherItem.main.temp_min}°C
+                    <strong>Min Temp:</strong> {Math.floor(weatherItem.main.temp_min) -273}°C
                   </div>
                   <div className={style.icon}></div>
                 </div>
